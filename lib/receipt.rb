@@ -4,6 +4,15 @@ class Receipt
     @items = items
   end
 
+  def print_out
+    y = all_items
+    y << "Sales Taxes: #{format('%0.2f', total_sales_tax)}" <<
+      "Total: #{format('%0.2f', total_with_taxes)}"
+    y
+  end
+
+  private
+
   def total_sales_tax
     items.sum { |item| item.tax }
   end
@@ -18,12 +27,5 @@ class Receipt
 
   def per_item(item)
     "#{item.name}: #{format('%0.2f', (item.price + item.tax))}"
-  end
-
-  def print_out
-    y = all_items
-    y << "Sales Taxes: #{format('%0.2f', total_sales_tax)}" <<
-      "Total: #{format('%0.2f', total_with_taxes)}"
-    y
   end
 end

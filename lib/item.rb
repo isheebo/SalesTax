@@ -12,6 +12,8 @@ class Item
     import_tax + sales_tax
   end
 
+  private
+
   def import_tax
     if imported
       ImportDutyTax.rate * price
