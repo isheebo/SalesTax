@@ -1,6 +1,3 @@
-# read from the input
-# for each line read from the input, get its quantity, item type using a factory,and the item's price
-
 require_relative "./food"
 require_relative "./book"
 require_relative "./medicine"
