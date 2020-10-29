@@ -6,6 +6,10 @@ class Item
     @imported = imported || false
   end
 
+  def tax
+    import_tax + sales_tax
+  end
+
   def import_tax
     if imported
       ImportDutyTax.rate * price
