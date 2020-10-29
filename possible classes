@@ -1,0 +1,22 @@
+possible classes
+
+SalesTax
+  BasicSalesTax
+  ImportDutyTax
+
+Item
+  Book
+  Medicine
+  Food
+  General -> do we need this class? maybe, maybe not?
+  --fields
+    name
+    price
+
+Basket
+  -- item
+  -- item quantity
+
+TaxCalculator(item) -> returns the item's taxes
+
+
