@@ -1,7 +1,7 @@
 require_relative "./food"
 require_relative "./book"
 require_relative "./medicine"
-require_relative "./non_categorized"
+require_relative "./taxable_item"
 require_relative "./basket_item"
 require_relative "./basket"
 
@@ -25,7 +25,7 @@ def create_basket_item(line_item)
          elsif quantity_item_name =~ /book/i
            Book
          else
-           NonCategorized
+           TaxableItem
          end.new(quantity_item_name.strip, price.to_f, imported)
 
   BasketItem.new(item, quantity)
