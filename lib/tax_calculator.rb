@@ -12,7 +12,6 @@ class TaxCalculator
 
   def import_tax
     if item.imported
-      # TODO: cater for quantity too
       item.price * ImportDutyTax.rate
     else
       0
@@ -20,7 +19,6 @@ class TaxCalculator
   end
 
   def sales_tax
-    # TODO: cater for quantity
     item.sales_tax
   end
 end
