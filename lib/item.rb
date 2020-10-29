@@ -1,4 +1,5 @@
 require_relative "./import_duty_tax"
+require_relative "./tax_calculator"
 
 class Item
   attr_accessor :name, :price, :imported
@@ -9,22 +10,12 @@ class Item
   end
 
   def tax
-    import_tax + sales_tax
+    TaxCalculator.new(self).compute
   end
 
   protected
 
   def sales_tax
     raise NotImplementedError
-  end
-
-  private
-
-  def import_tax
-    if imported
-      ImportDutyTax.rate * price
-    else
-      0
-    end
   end
 end
