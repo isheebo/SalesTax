@@ -20,5 +20,7 @@ class Item
     end
   end
 
-  def sales_tax; end
+  def sales_tax
+    raise NotImplementedError
+  end
 end

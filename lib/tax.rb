@@ -1,3 +1,5 @@
 class Tax
-  def self.rate; end
+  def self.rate
+    raise NotImplementedError
+  end
 end
