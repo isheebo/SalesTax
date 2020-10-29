@@ -1,3 +1,3 @@
 class Tax
-  def rate; end
+  def self.rate; end
 end

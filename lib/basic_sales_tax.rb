@@ -1,5 +1,5 @@
 class BasicSalesTax < Tax
-  def rate
+  def self.rate
     10.0 / 100
   end
 end
