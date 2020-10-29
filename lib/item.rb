@@ -1,3 +1,5 @@
+require_relative "./import_duty_tax"
+
 class Item
   attr_accessor :name, :price, :imported
   def initialize(name, price, imported)
