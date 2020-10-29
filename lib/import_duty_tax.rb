@@ -1,3 +1,5 @@
+require_relative "./tax"
+
 class ImportDutyTax < Tax
   def self.rate
     5.0 / 100

@@ -1,3 +1,9 @@
+# read from the input
+# for each line read from the input, get its quantity, item type using a factory,and the item's price
+
+require_relative "./food"
+require_relative "./non_categorized"
+
 def main
   ARGV.map do |line_item|
     create_cart_item(line_item)
@@ -19,7 +25,7 @@ def create_cart_item(line_item)
             Book
           else
             NonCategorized
-          end.new
+          end.new(quantity_item_name, price, imported)
   p klass.class
 end
 

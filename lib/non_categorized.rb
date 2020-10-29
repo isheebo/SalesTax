@@ -1,3 +1,5 @@
+require_relative "./item"
+
 class NonCategorized < Item
   def sales_tax
     price * BasicSalesTax.rate

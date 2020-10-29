@@ -12,6 +12,7 @@ Item
   --fields
     name
     price
+Receipt
 
 Basket
   -- item
