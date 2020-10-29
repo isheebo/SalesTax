@@ -2,32 +2,33 @@ require_relative "./food"
 require_relative "./book"
 require_relative "./medicine"
 require_relative "./non_categorized"
-require_relative "./receipt"
+require_relative "./basket_item"
+require_relative "./basket"
 
 def main
-  items = ARGV.map do |line_item|
-    create_cart_item(line_item)
+  basket_items = ARGV.map do |line_item|
+    create_basket_item(line_item)
   end
 
-  receipt = Receipt.new(items)
-  puts receipt.print_out
+  puts Basket.new(basket_items).generate_receipt
 end
 
-def create_cart_item(line_item)
+def create_basket_item(line_item)
   quantity_item_name, price = line_item.split(/at\s+/)
   quantity = quantity_item_name.scan(/\A\d{1}/)[0].to_f
   imported = quantity_item_name.match?(/import/i)
-  hsh = { price: price.to_f, quantity: quantity.to_f, imported: imported }
 
-  if quantity_item_name =~ /chocolate/i
-    Food
-  elsif quantity_item_name =~ /pills/i
-    Medicine
-  elsif quantity_item_name =~ /book/i
-    Book
-  else
-    NonCategorized
-  end.new(quantity_item_name.strip, price.to_f, imported)
+  item = if quantity_item_name =~ /chocolate/i
+           Food
+         elsif quantity_item_name =~ /pills/i
+           Medicine
+         elsif quantity_item_name =~ /book/i
+           Book
+         else
+           NonCategorized
+         end.new(quantity_item_name.strip, price.to_f, imported)
+
+  BasketItem.new(item, quantity)
 end
 
 main
