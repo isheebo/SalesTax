@@ -1,6 +1,6 @@
-require_relative "./item"
+require_relative "./tax_exempted_item.rb"
 
-class Medicine < Item
+class Medicine < TaxExemptedItem
   def sales_tax
     0
   end

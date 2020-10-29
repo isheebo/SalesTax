@@ -12,6 +12,12 @@ class Item
     import_tax + sales_tax
   end
 
+  protected
+
+  def sales_tax
+    raise NotImplementedError
+  end
+
   private
 
   def import_tax
@@ -20,9 +26,5 @@ class Item
     else
       0
     end
-  end
-
-  def sales_tax
-    raise NotImplementedError
   end
 end
