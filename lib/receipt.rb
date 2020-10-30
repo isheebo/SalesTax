@@ -18,7 +18,7 @@ class Receipt
   end
 
   def total_amount_plus_tax
-    basket_items.sum { |bt| bt.price * bt.quantity }
+    basket_items.sum { |bt| (bt.price * bt.quantity) + bt.tax }
   end
 
   def per_item(bskt_item)
