@@ -18,4 +18,4 @@ class App
   end
 end
 
-puts App.new(ARGV).generate_receipt
+# puts App.new(ARGV).generate_receipt

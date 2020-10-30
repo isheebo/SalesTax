@@ -1,5 +1,6 @@
 require "spec_helper"
 require_relative "../lib/app"
+require_relative "../lib/errors"
 
 RSpec.describe Basket do
   inputs = [
@@ -37,6 +38,20 @@ RSpec.describe Basket do
     it "generates a receipt" do
       inputs.each_with_index do |input, idx|
         expect(App.new(input).generate_receipt).to match_array outputs[idx]
+      end
+    end
+  end
+
+  context "with an invalid input" do
+    context "when given an empty basket" do
+      it "raises an error" do
+        expect { App.new([]).generate_receipt }.to raise_error(EmptyBasketError)
+      end
+    end
+
+    context "when the given basket has invalid items (with no names)" do
+      it "raises an error" do
+        expect { App.new(["1 book at 12.49", "", " "]).generate_receipt }.to raise_error(InvalidLineItemError)
       end
     end
   end

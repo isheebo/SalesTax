@@ -5,6 +5,7 @@ require_relative "./taxable_item"
 require_relative "./basket_item"
 require_relative "./basket"
 require_relative "./basket_item_factory"
+require_relative "./errors"
 
 class Parser
   attr_reader :items
@@ -13,8 +14,20 @@ class Parser
   end
 
   def parse
-    items.map do |item|
+    line_items.map do |item|
       BasketItemFactory.create(item)
+    end
+  end
+
+  private
+
+  def line_items
+    if items.empty?
+      raise EmptyBasketError
+    elsif items.any? { |item| item.strip.empty? }
+      raise InvalidLineItemError
+    else
+      items
     end
   end
 end
