@@ -18,10 +18,3 @@ class Parser
     end
   end
 end
-
-def main
-  basket_items = Parser.new(ARGV).parse
-  puts Basket.new(basket_items).generate_receipt
-end
-
-main
