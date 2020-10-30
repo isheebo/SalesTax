@@ -6,8 +6,8 @@ class Receipt
 
   def print_out
     out = all_items
-    out << "Sales Taxes: #{format('%0.2f', total_sales_tax)}"
-    out << "Total: #{format('%0.2f', total_amount_plus_tax)}"
+    out << "Sales Taxes: #{format('%<taxes>.2f', taxes: total_sales_tax)}"
+    out << "Total: #{format('%<amount>.2f', amount: total_amount_plus_tax)}"
     out
   end
 
@@ -22,7 +22,7 @@ class Receipt
   end
 
   def per_item(bskt_item)
-    "#{bskt_item.name}: #{format('%0.2f', (bskt_item.price + bskt_item.tax) * bskt_item.quantity)}"
+    "#{bskt_item.name}: #{format('%<total>.2f', total: (bskt_item.price + bskt_item.tax) * bskt_item.quantity)}"
   end
 
   def all_items
