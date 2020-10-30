@@ -5,7 +5,7 @@ class TaxCalculator
   end
 
   def compute
-    import_tax + sales_tax
+    ((import_tax + sales_tax) * 20).ceil / 20.0
   end
 
   private
