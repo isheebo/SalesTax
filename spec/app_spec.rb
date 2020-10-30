@@ -2,7 +2,7 @@ require "spec_helper"
 require_relative "../lib/app"
 require_relative "../lib/errors"
 
-RSpec.describe Basket do
+RSpec.describe App do
   inputs = [
     ["1 book at 12.49", "1 music CD at 14.99", "1 chocolate bar at 0.85"],
     ["1 imported box of chocolates at 10.00", "1 imported bottle of perfume at 47.50"], [
