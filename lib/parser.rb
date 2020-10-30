@@ -5,36 +5,47 @@ require_relative "./taxable_item"
 require_relative "./basket_item"
 require_relative "./basket"
 
-def main
-  basket_items = ARGV.map do |line_item|
-    create_basket_item(line_item)
+class Parser
+  attr_reader :items
+  def initialize(items)
+    @items = items
   end
 
-  puts generate_receipt(basket_items)
+  def parse
+    items.map do |item|
+      parse_item(item)
+    end
+  end
+
+  private
+
+  def parse_item(item)
+    attrs = extract_attributes(item)
+    item = if attrs[:name] =~ /chocolate/i
+             Food
+           elsif attrs[:name] =~ /pills/i
+             Medicine
+           elsif attrs[:name] =~ /book/i
+             Book
+           else
+             TaxableItem
+           end.new(attrs[:name], attrs[:price], attrs[:imported])
+    BasketItem.new(item, attrs[:quantity])
+  end
+
+  def extract_attributes(line_item)
+    quantity_item_name, price = line_item.split(/at\s+/)
+    quantity = quantity_item_name.scan(/\A\d{1}/)[0].to_f
+    quantity = 1.0 if quantity <= 0
+
+    imported = quantity_item_name.match?(/import/i)
+    { name: quantity_item_name.strip, price: price.to_f, imported: imported, quantity: quantity }
+  end
 end
 
-def generate_receipt(basket_items)
-  Basket.new(basket_items).generate_receipt
-end
-
-def create_basket_item(line_item)
-  quantity_item_name, price = line_item.split(/at\s+/)
-  quantity = quantity_item_name.scan(/\A\d{1}/)[0].to_f
-  quantity = 1 if quantity <= 0
-
-  imported = quantity_item_name.match?(/import/i)
-
-  item = if quantity_item_name =~ /chocolate/i
-           Food
-         elsif quantity_item_name =~ /pills/i
-           Medicine
-         elsif quantity_item_name =~ /book/i
-           Book
-         else
-           TaxableItem
-         end.new(quantity_item_name.strip, price.to_f, imported)
-
-  BasketItem.new(item, quantity)
+def main
+  basket_items = Parser.new(ARGV).parse
+  puts Basket.new(basket_items).generate_receipt
 end
 
 main
