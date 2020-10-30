@@ -1,4 +1,6 @@
 ## Running the Samples
+For manual testing, you can uncomment this line `# puts App.new(ARGV).generate_receipt` in `lib/app.rb` and run any of these on the terminal.
+
 ```sh
 ruby lib/app.rb "1 book at 12.49" "1 music CD at 14.99" "1 chocolate bar at 0.85"
 ruby lib/app.rb "1 imported box of chocolates at 10.00" "1 imported bottle of perfume at 47.50"
